@@ -1,0 +1,107 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Règles pour les utilisateurs
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read: if request.auth != null && 
+        (resource.data.role == 'admin' || 
+         resource.data.assignedDoctorId == request.auth.uid);
+    }
+
+    // Règles pour les patients
+    match /patients/{patientId} {
+      allow read, write: if request.auth != null && 
+        (resource.data.assignedDoctorId == request.auth.uid ||
+         request.auth.token.role == 'admin');
+      allow create: if request.auth != null;
+    }
+
+    // Règles pour les rendez-vous
+    match /appointments/{appointmentId} {
+      allow read, write: if request.auth != null && 
+        (resource.data.doctorId == request.auth.uid ||
+         resource.data.patientId == request.auth.uid ||
+         request.auth.token.role == 'admin');
+      allow create: if request.auth != null;
+    }
+
+    // Règles pour les notifications
+    match /notifications/{notificationId} {
+      allow read, write: if request.auth != null && 
+        (resource.data.userId == request.auth.uid ||
+         resource.data.doctorId == request.auth.uid ||
+         request.auth.token.role == 'admin');
+      allow create: if request.auth != null;
+    }
+
+    // Règles pour les fichiers
+    match /files/{fileId} {
+      allow read, write: if request.auth != null && 
+        (resource.data.uploadedBy == request.auth.uid ||
+         resource.data.patientId == request.auth.uid ||
+         request.auth.token.role == 'admin');
+      allow create: if request.auth != null;
+    }
+
+    // Règles pour les diagnostics
+    match /diagnostics/{diagnosticId} {
+      allow read, write: if request.auth != null && 
+        (resource.data.doctorId == request.auth.uid ||
+         resource.data.patientId == request.auth.uid ||
+         request.auth.token.role == 'admin');
+      allow create: if request.auth != null;
+    }
+
+    // Règles pour les prescriptions
+    match /prescriptions/{prescriptionId} {
+      allow read, write: if request.auth != null && 
+        (resource.data.doctorId == request.auth.uid ||
+         resource.data.patientId == request.auth.uid ||
+         request.auth.token.role == 'admin');
+      allow create: if request.auth != null;
+    }
+
+    // Règles pour les rapports médicaux
+    match /reports/{reportId} {
+      allow read, write: if request.auth != null && 
+        (resource.data.doctorId == request.auth.uid ||
+         resource.data.patientId == request.auth.uid ||
+         request.auth.token.role == 'admin');
+      allow create: if request.auth != null;
+    }
+
+    // Règles pour les messages
+    match /messages/{messageId} {
+      allow read, write: if request.auth != null && 
+        (resource.data.senderId == request.auth.uid ||
+         resource.data.receiverId == request.auth.uid);
+      allow create: if request.auth != null;
+    }
+
+    // Règles pour les conversations
+    match /conversations/{conversationId} {
+      allow read, write: if request.auth != null && 
+        (resource.data.participants[request.auth.uid] != null ||
+         request.auth.token.role == 'admin');
+      allow create: if request.auth != null;
+    }
+
+    // Règles pour les statistiques (lecture seule pour les admins)
+    match /statistics/{statisticId} {
+      allow read: if request.auth != null && request.auth.token.role == 'admin';
+      allow write: if false; // Les statistiques sont générées automatiquement
+    }
+
+    // Règles pour les logs d'audit
+    match /audit_logs/{logId} {
+      allow read: if request.auth != null && request.auth.token.role == 'admin';
+      allow write: if false; // Les logs sont créés automatiquement
+    }
+
+    // Règles par défaut - refuser tout accès non autorisé
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

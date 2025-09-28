@@ -1,0 +1,37 @@
+<p-toolbar>
+  <ng-template pTemplate="left">
+    <div class="logo-container">
+      <i class="pi pi-apple" style="font-size: 2rem; color: #007bff;"></i>
+      <span class="logo-text">Essaie Sakai</span>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="right">
+    <div class="header-actions">
+      <p-button 
+        icon="pi pi-bell" 
+        [text]="true" 
+        [rounded]="true" 
+        severity="secondary"
+        [badge]="3"
+        badgeClass="p-badge-danger">
+      </p-button>
+      
+      <p-button 
+        icon="pi pi-cog" 
+        [text]="true" 
+        [rounded]="true" 
+        severity="secondary">
+      </p-button>
+      
+      <p-splitButton 
+        label="Admin User" 
+        icon="pi pi-user"
+        [model]="userMenuItems"
+        [text]="true"
+        [rounded]="true"
+        severity="secondary">
+      </p-splitButton>
+    </div>
+  </ng-template>
+</p-toolbar>

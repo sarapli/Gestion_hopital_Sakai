@@ -1,0 +1,27 @@
+<ul class="layout-menu">
+    <ng-container *ngFor="let item of model">
+        <li *ngIf="item.separator" class="layout-menuitem-category">
+            <div class="layout-menuitem-separator"></div>
+        </li>
+        <li *ngIf="!item.separator && (item.items && item.items.length > 0)" class="layout-menuitem-category">
+            <div class="layout-menuitem-category-icon">
+                <i [class]="item.icon"></i>
+            </div>
+            <div class="layout-menuitem-category-text">{{ item.label }}</div>
+            <div class="layout-menuitem-category-icon">
+                <i class="pi pi-fw pi-angle-down"></i>
+            </div>
+        </li>
+        <li *ngIf="!item.separator && item.items && item.items.length > 0" class="layout-menuitem">
+            <ul class="layout-submenu">
+                <li class="layout-menuitem" *ngFor="let subitem of item.items">
+                    <a [routerLink]="subitem.routerLink" [href]="subitem.url" [target]="subitem.target" class="layout-menuitem-link">
+                        <i [class]="subitem.icon" class="layout-menuitem-icon"></i>
+                        <span class="layout-menuitem-text">{{ subitem.label }}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ng-container>
+</ul>
+

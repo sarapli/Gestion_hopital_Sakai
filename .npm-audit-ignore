@@ -1,0 +1,19 @@
+# Ignorer les vulnérabilités de xlsx dans sakai-ng
+# Ces vulnérabilités sont dans une dépendance de sakai-ng et ne peuvent pas être corrigées
+# sans casser la librairie
+{
+  "advisories": [],
+  "metadata": {
+    "vulnerabilities": {
+      "xlsx": {
+        "severity": "high",
+        "isDirect": false,
+        "via": ["sakai-ng"],
+        "effects": [],
+        "range": "*",
+        "nodes": ["node_modules/sakai-ng/node_modules/xlsx"],
+        "fixAvailable": false
+      }
+    }
+  }
+}

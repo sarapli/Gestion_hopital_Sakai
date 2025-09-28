@@ -1,0 +1,21 @@
+<div class="layout-wrapper layout-3d" [class]="layoutService.config().layoutMode">
+    <!-- Particules d'arrière-plan -->
+    <app-particles></app-particles>
+    
+    <div class="layout-main-container">
+        <div class="layout-sidebar sidebar-3d">
+            <app-sidebar></app-sidebar>
+        </div>
+        <div class="layout-main">
+            <div class="layout-topbar topbar-3d">
+                <app-topbar></app-topbar>
+            </div>
+            <div class="layout-content content-3d">
+                <router-outlet></router-outlet>
+            </div>
+            <app-footer></app-footer>
+        </div>
+    </div>
+    <app-config></app-config>
+</div>
+

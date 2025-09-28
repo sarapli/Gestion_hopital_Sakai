@@ -1,0 +1,36 @@
+<p-sidebar [(visible)]="layoutService.state().configSidebarVisible" position="right" [style]="{width: '20rem'}" styleClass="layout-config-sidebar">
+    <div class="layout-config-content">
+        <h5>Configuration</h5>
+        <div class="field">
+            <label for="inputStyle" class="font-bold block mb-2">Input Style</label>
+            <select id="inputStyle" class="w-full p-2 border-round" [(ngModel)]="layoutService.config().inputStyle">
+                <option value="outlined">Outlined</option>
+                <option value="filled">Filled</option>
+            </select>
+        </div>
+        <div class="field">
+            <label for="menuMode" class="font-bold block mb-2">Menu Mode</label>
+            <select id="menuMode" class="w-full p-2 border-round" [(ngModel)]="layoutService.config().menuMode">
+                <option value="static">Static</option>
+                <option value="overlay">Overlay</option>
+            </select>
+        </div>
+        <div class="field">
+            <label for="colorScheme" class="font-bold block mb-2">Color Scheme</label>
+            <select id="colorScheme" class="w-full p-2 border-round" [(ngModel)]="layoutService.config().colorScheme">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
+        <div class="field-checkbox">
+            <p-inputSwitch [(ngModel)]="layoutService.config().ripple"></p-inputSwitch>
+            <label for="ripple" class="ml-2">Ripple Effect</label>
+        </div>
+    </div>
+</p-sidebar>
+
+
+
+
+
+

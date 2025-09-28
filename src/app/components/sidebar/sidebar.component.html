@@ -1,0 +1,32 @@
+<p-sidebar 
+  [(visible)]="sidebarVisible" 
+  [fullScreen]="false" 
+  [modal]="false"
+  position="left"
+  styleClass="custom-sidebar">
+  
+  <ng-template pTemplate="header">
+    <div class="sidebar-header">
+      <h3>Navigation</h3>
+      <p-button 
+        icon="pi pi-times" 
+        [text]="true" 
+        [rounded]="true" 
+        severity="secondary"
+        (onClick)="toggleSidebar()">
+      </p-button>
+    </div>
+  </ng-template>
+
+  <p-menu [model]="items" styleClass="sidebar-menu"></p-menu>
+</p-sidebar>
+
+<div class="sidebar-toggle">
+  <p-button 
+    icon="pi pi-bars" 
+    [text]="true" 
+    [rounded]="true" 
+    severity="secondary"
+    (onClick)="toggleSidebar()">
+  </p-button>
+</div>

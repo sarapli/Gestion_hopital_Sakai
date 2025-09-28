@@ -1,0 +1,99 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Tableau de bord</h1>
+    <p>Bienvenue dans votre espace d'administration</p>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div class="stats-grid">
+    <div class="stat-card" *ngFor="let card of statCards">
+      <div class="stat-icon" [style.background-color]="card.color">
+        <i [class]="card.icon"></i>
+      </div>
+      <div class="stat-content">
+        <h3>{{ card.title }}</h3>
+        <div class="stat-value">{{ card.value }}</div>
+        <div class="stat-trend" [class.trend-up]="card.trend === 'up'" [class.trend-down]="card.trend === 'down'">
+          <i [class]="card.trend === 'up' ? 'pi pi-arrow-up' : 'pi pi-arrow-down'"></i>
+          {{ card.trendValue }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="charts-section">
+    <div class="row">
+      <div class="col-md-8">
+        <p-card header="Évolution des ventes" styleClass="chart-card">
+          <p-chart type="line" [data]="chartData" [options]="chartOptions" height="300px"></p-chart>
+        </p-card>
+      </div>
+      <div class="col-md-4">
+        <p-card header="Activité récente" styleClass="activity-card">
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="activity-icon">
+                <i class="pi pi-user-plus"></i>
+              </div>
+              <div class="activity-content">
+                <p>Nouvel utilisateur inscrit</p>
+                <small>Il y a 2 minutes</small>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon">
+                <i class="pi pi-shopping-cart"></i>
+              </div>
+              <div class="activity-content">
+                <p>Nouvelle commande reçue</p>
+                <small>Il y a 5 minutes</small>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon">
+                <i class="pi pi-box"></i>
+              </div>
+              <div class="activity-content">
+                <p>Produit mis à jour</p>
+                <small>Il y a 10 minutes</small>
+              </div>
+            </div>
+          </div>
+        </p-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="quick-actions">
+    <p-card header="Actions rapides">
+      <div class="action-buttons">
+        <p-button 
+          label="Ajouter un utilisateur" 
+          icon="pi pi-user-plus" 
+          severity="primary"
+          [rounded]="true">
+        </p-button>
+        <p-button 
+          label="Nouveau produit" 
+          icon="pi pi-plus" 
+          severity="secondary"
+          [rounded]="true">
+        </p-button>
+        <p-button 
+          label="Générer un rapport" 
+          icon="pi pi-chart-bar" 
+          severity="success"
+          [rounded]="true">
+        </p-button>
+        <p-button 
+          label="Paramètres" 
+          icon="pi pi-cog" 
+          severity="info"
+          [rounded]="true">
+        </p-button>
+      </div>
+    </p-card>
+  </div>
+</div>

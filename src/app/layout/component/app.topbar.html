@@ -1,0 +1,47 @@
+<div class="layout-topbar">
+    <div class="layout-topbar-logo">
+        <img src="assets/layout/images/logo-dark.svg" alt="logo" height="50" />
+        <span class="app-title">MedApp</span>
+    </div>
+
+    <button class="p-link layout-menu-button layout-topbar-button" (click)="onMenuButtonClick()">
+        <i class="pi pi-bars"></i>
+    </button>
+
+    <button class="p-link layout-topbar-menu-button layout-topbar-button" (click)="onConfigClick()">
+        <i class="pi pi-cog"></i>
+    </button>
+
+    <div class="layout-topbar-menu">
+        <div class="layout-topbar-menu-left">
+            <button class="p-link layout-topbar-button" routerLink="/appointments">
+                <i class="pi pi-calendar"></i>
+                <span>Rendez-vous</span>
+            </button>
+            <button class="p-link layout-topbar-button" routerLink="/patients">
+                <i class="pi pi-users"></i>
+                <span>Patients</span>
+            </button>
+            <button class="p-link layout-topbar-button">
+                <i class="pi pi-bell"></i>
+                <span>Notifications</span>
+            </button>
+        </div>
+        
+        <div class="layout-topbar-menu-right">
+            <div class="user-info" *ngIf="currentUser">
+                <span class="user-name">{{ currentUser.firstName }} {{ currentUser.lastName }}</span>
+                <span class="user-role">{{ getRoleLabel(currentUser.role) }}</span>
+            </div>
+            <p-avatar 
+                [label]="getUserInitials(currentUser)" 
+                styleClass="p-mr-2"
+                size="normal"
+                shape="circle"
+                (click)="userMenu.toggle($event)"
+            ></p-avatar>
+            <p-menu #userMenu [model]="userMenuItems" [popup]="true"></p-menu>
+        </div>
+    </div>
+</div>
+
